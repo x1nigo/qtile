@@ -53,6 +53,7 @@ keys = [
     Key([mod], "F2", lazy.spawn("fontwizard"), desc="Change system fonts"),
     Key([mod], "w", lazy.spawn(myBrowser), desc="Load up the browser"),
     Key([mod], "Insert", lazy.spawn("inserter"), desc="Insert a bookmark"),
+    Key([mod], "p", lazy.spawn("texfind"), desc="Find and display PDF files"),
 
     Key([mod], "r", lazy.spawn("{} -e {}" .format(terminal, myFileManager)), desc="Launch the file browser"),
     Key([mod], "F3", lazy.spawn("{} -e {}" .format(terminal, audiomixer)), desc="Open audio controls"),
@@ -122,9 +123,9 @@ for i in groups:
 
 layouts = [
     layout.MonadTall(
-        border_width=3,
+        border_width=2,
         margin=12,
-        border_focus="#500000",
+        border_focus="#c687ff",
         border_normal="#222222",
         ratio=0.5,
         ),
@@ -146,7 +147,6 @@ widget_defaults = dict(
     font="BlexMono Nerd Font Mono",
     fontsize=12,
     padding=3,
-    background="#1d2021",
 )
 extension_defaults = widget_defaults.copy()
 
@@ -217,6 +217,7 @@ screens = [
                 widget.TextBox(),
             ],
             20,
+            background="#1d2021df",
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
