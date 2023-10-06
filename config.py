@@ -31,26 +31,6 @@ from libqtile.utils import guess_terminal
 import os
 import psutil
 
-@hook.subscribe.client_new
-def _swallow(window):
-    pid = window.get_net_wm_pid()
-    ppid = psutil.Process(pid).ppid()
-    cpids = {c.window.get_net_wm_pid(): wid for wid, c in window.qtile.windows_map.items()}
-    for i in range(5):
-        if not ppid:
-            return
-        if ppid in cpids:
-            parent = window.qtile.windows_map.get(cpids[ppid])
-            parent.minimized = True
-            window.parent = parent
-            return
-        ppid = psutil.Process(ppid).ppid()
-
-@hook.subscribe.client_killed
-def _unswallow(window):
-    if hasattr(window, 'parent'):
-        window.parent.minimized = False
-
 mod = "mod4"
 myBrowser = "firefox"
 myFileManager = "lfrun"
@@ -263,9 +243,9 @@ cursor_warp = False
 floating_layout = layout.Floating(
     float_rules=[]
 )
-auto_fullscreen = False
+auto_fullscreen = True
 focus_on_window_activation = "smart"
-reconfigure_screens = False
+reconfigure_screens = True
 
 # Enable window swallowing (?)
 @hook.subscribe.client_new
