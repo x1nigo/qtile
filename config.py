@@ -44,7 +44,7 @@ colors = [
     ["#161818ef", "#161818ff"], # bg
     ["#0a0f14", "#0a0f14"],
     ["#eeeeee", "#eeeeee"],
-    ["#f7768e", "#f7768e"],
+    ["#ff5555", "#ff5555"],
     ["#9ece6a", "#9ece6a"],
     ["#e0af68", "#e0af68"],
     ["#7aa2f7", "#7aa2f7"],
@@ -316,10 +316,10 @@ floats_kept_above = True
 cursor_warp = False
 floating_layout = layout.Floating(
         float_rules = [
-            Match(title = "termfloat"),
+            Match(title = "termfloat"),  # floating terminal
             ],
         border_width = 2,
-        border_focus = colors[3],
+        border_focus = colors[7],
         border_normal = colors[8],
 )
 auto_fullscreen = True
