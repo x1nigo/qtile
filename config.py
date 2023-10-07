@@ -43,13 +43,13 @@ musicPlayer = "ncmpcpp"
 colors = [
     ["#1a1b26", "#1a1b26"],
     ["#161818", "#161818"],
-    ["#d0d0d0", "#d0d0d0"],
+    ["#eeeeee", "#eeeeee"],
     ["#500000", "#500000"],
     ["#c3e88d", "#c3e88d"],
     ["#ffcb6b", "#ffcb6b"],
     ["#82aaff", "#82aaff"],
     ["#a9b1f6", "#a9b1f6"],
-    ["#89ddff", "#89ddff"],
+    ["#444460", "#444460"],
     ]
 
 keys = [
@@ -191,7 +191,7 @@ screens = [
                 widget.TextBox(
                     "",
                     fontsize = 30,
-                    foreground = colors[7],
+                    foreground = colors[8],
                     mouse_callbacks = {"Button1": lazy.spawn(terminal)},
                     ),
                 widget.TextBox(),
@@ -209,7 +209,7 @@ screens = [
                 widget.CurrentLayout(),
                 widget.TextBox(" | "),
                 widget.WindowName(
-                    foreground = colors[7],
+                    foreground = colors[8],
                     ),
                 widget.TextBox(
                     "󰒍",
