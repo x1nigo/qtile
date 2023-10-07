@@ -231,14 +231,14 @@ screens = [
                     foreground = colors[7],
                     ),
                 widget.CPU(),
-                widget.TextBox(),
+                widget.TextBox(" | "),
                 widget.TextBox(
                     "󰄧",
                     fontsize = 20,
                     foreground = colors[7],
                     ),
                 widget.Memory(),
-                widget.TextBox(),
+                widget.TextBox(" | "),
                 widget.TextBox(
                     "󰠓",
                     fontsize = 20,
@@ -249,7 +249,7 @@ screens = [
                     api = "coinbase",
                     format = "{symbol}{amount:.2f}",
                     ),
-                widget.TextBox(),
+                widget.TextBox(" | "),
                 widget.TextBox(
                     "󰃠",
                     fontsize = 20,
@@ -258,7 +258,7 @@ screens = [
                 widget.Backlight(
                     backlight_name = "intel_backlight",
                     ),
-                widget.TextBox(),
+                widget.TextBox(" | "),
                 widget.TextBox(
                     "󰒍",
                     fontsize = 20,
@@ -267,7 +267,7 @@ screens = [
                 widget.Net(
                     format = "{down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}"
                     ),
-                widget.TextBox(),
+                widget.TextBox(" | "),
                 widget.TextBox(
                     "󰋔",
                     fontsize = 20,
@@ -280,7 +280,7 @@ screens = [
                     empty_char = "x",
                     format = "{char}: {percent:2.0%}"
                     ),
-                widget.TextBox(),
+                widget.TextBox(" | "),
                 widget.TextBox(
                         "󱎫",
                         fontsize = 20,
