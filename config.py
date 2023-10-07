@@ -41,7 +41,7 @@ rssFeed = "newsboat"
 musicPlayer = "ncmpcpp"
 
 colors = [
-    ["#1d2021ef", "#1d2021ff"], # bg
+    ["#161818ef", "#161818ff"], # bg
     ["#161818", "#161818"],
     ["#eeeeee", "#eeeeee"],
     ["#500000", "#500000"],
@@ -87,6 +87,18 @@ keys = [
     Key([mod], "F12", lazy.reload_config(), desc="Reload the config"),
 
     # Multimedia Controls
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"), desc="Raise the volume"),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), desc="Lower the volume"),
+    Key(["shift"], "XF86AudioRaiseVolume", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+"), desc="Raise the mic"),
+    Key(["shift"], "XF86AudioLowerVolume", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-"), desc="Lower the mic"),
+
+    Key([], "XF86AudioMute", lazy.spawn("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), desc="Mute the volume"),
+    Key([], "XF86AudioMicMute", lazy.spawn("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), desc="Mute the mic"),
+
+    Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 5"), desc="Increase the screen brightness"),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 5"), desc="Decrease the screen brightness"),
+
+    # Alternative Multimedia Controls
     Key([], "XF86AudioRaiseVolume", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"), desc="Raise the volume"),
     Key([], "XF86AudioLowerVolume", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), desc="Lower the volume"),
     Key(["shift"], "XF86AudioRaiseVolume", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+"), desc="Raise the mic"),
@@ -163,12 +175,12 @@ my_layout = {
 layouts = [
     layout.MonadTall(**my_layout),
     layout.Max(),
+    layout.MonadWide(**my_layout),
     layout.Columns(**my_layout),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
     # layout.Matrix(),
-    # layout.MonadWide(),
     # layout.RatioTile(),
     # layout.Tile(),
     # layout.TreeTab(),
@@ -179,7 +191,7 @@ layouts = [
 widget_defaults = dict(
     font = "BlexMono Nerd Font Mono",
     fontsize = 12,
-    padding = 3,
+    padding = 5,
 )
 extension_defaults = widget_defaults.copy()
 
@@ -212,22 +224,18 @@ screens = [
                     foreground = colors[8],
                     ),
                 widget.TextBox(
-                    "󰒍",
+                    "󰄫",
                     fontsize = 22,
                     foreground = colors[7],
                     ),
-                widget.Net(
-                    format = "{down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}"
-                    ),
+                widget.CPU(),
                 widget.TextBox(),
                 widget.TextBox(
-                    "󰃠",
+                    "󰄧",
                     fontsize = 22,
                     foreground = colors[7],
                     ),
-                widget.Backlight(
-                    backlight_name = "intel_backlight",
-                    ),
+                widget.Memory(),
                 widget.TextBox(),
                 widget.TextBox(
                     "󰠓",
@@ -241,6 +249,24 @@ screens = [
                     ),
                 widget.TextBox(),
                 widget.TextBox(
+                    "󰃠",
+                    fontsize = 22,
+                    foreground = colors[7],
+                    ),
+                widget.Backlight(
+                    backlight_name = "intel_backlight",
+                    ),
+                widget.TextBox(),
+                widget.TextBox(
+                    "󰒍",
+                    fontsize = 22,
+                    foreground = colors[7],
+                    ),
+                widget.Net(
+                    format = "{down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}"
+                    ),
+                widget.TextBox(),
+                widget.TextBox(
                     "",
                     fontsize = 22,
                     foreground = colors[7],
@@ -250,7 +276,7 @@ screens = [
                     charge_char = "^",
                     discharge_char = "v",
                     empty_char = "x",
-                    format = "{char} {percent:2.0%}"
+                    format = "{char}: {percent:2.0%}"
                     ),
                 widget.TextBox(),
                 widget.TextBox(
