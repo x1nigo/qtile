@@ -41,7 +41,7 @@ rssFeed = "newsboat"
 musicPlayer = "ncmpcpp"
 
 colors = [
-    ["#1a1b26", "#1a1b26"],
+    ["#1d2021ef", "#1d2021ff"], # bg
     ["#161818", "#161818"],
     ["#eeeeee", "#eeeeee"],
     ["#500000", "#500000"],
@@ -262,7 +262,7 @@ screens = [
                 widget.TextBox(),
             ],
             20,
-            background = ["#1d2021df", "#1d2021ff"],
+            background = colors[0],
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
