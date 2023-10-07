@@ -201,14 +201,12 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.TextBox(),
                 widget.TextBox(
                     "",
                     fontsize = 30,
                     foreground = colors[8],
                     mouse_callbacks = {"Button1": lazy.spawn(terminal)},
                     ),
-                widget.TextBox(),
                 widget.GroupBox(
                     highlight_method = "line",
                     active = colors[7],
@@ -227,21 +225,21 @@ screens = [
                     ),
                 widget.TextBox(
                     "󰄫",
-                    fontsize = 22,
+                    fontsize = 20,
                     foreground = colors[7],
                     ),
                 widget.CPU(),
                 widget.TextBox(),
                 widget.TextBox(
                     "󰄧",
-                    fontsize = 22,
+                    fontsize = 20,
                     foreground = colors[7],
                     ),
                 widget.Memory(),
                 widget.TextBox(),
                 widget.TextBox(
                     "󰠓",
-                    fontsize = 22,
+                    fontsize = 20,
                     foreground = colors[7],
                    ),
                 widget.CryptoTicker(
@@ -252,7 +250,7 @@ screens = [
                 widget.TextBox(),
                 widget.TextBox(
                     "󰃠",
-                    fontsize = 22,
+                    fontsize = 20,
                     foreground = colors[7],
                     ),
                 widget.Backlight(
@@ -261,7 +259,7 @@ screens = [
                 widget.TextBox(),
                 widget.TextBox(
                     "󰒍",
-                    fontsize = 22,
+                    fontsize = 20,
                     foreground = colors[7],
                     ),
                 widget.Net(
@@ -270,7 +268,7 @@ screens = [
                 widget.TextBox(),
                 widget.TextBox(
                     "󰋔",
-                    fontsize = 22,
+                    fontsize = 20,
                     foreground = colors[7],
                     ),
                 widget.Battery(
@@ -282,14 +280,13 @@ screens = [
                     ),
                 widget.TextBox(),
                 widget.TextBox(
-                        "",
-                        fontsize = 22,
+                        "󱎫",
+                        fontsize = 20,
                         foreground = colors[7],
                         ),
                 widget.Clock(format = "%Y %b %d (%a) %I:%M%p"),
-                widget.TextBox(),
             ],
-            20,
+            24,
             background = colors[0],
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
