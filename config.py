@@ -42,7 +42,7 @@ musicPlayer = "ncmpcpp"
 
 colors = [
     ["#161818ef", "#161818ff"], # bg
-    ["#161818", "#161818"],
+    ["#0a0f14", "#0a0f14"],
     ["#eeeeee", "#eeeeee"],
     ["#500000", "#500000"],
     ["#c3e88d", "#c3e88d"],
@@ -55,6 +55,7 @@ colors = [
 keys = [
     # Some basic commands.
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([mod, "shift"], "Return", lazy.spawn("floater"), desc="Launch floating terminal"),
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen on the focused window",),
@@ -87,28 +88,29 @@ keys = [
     Key([mod], "F12", lazy.reload_config(), desc="Reload the config"),
 
     # Multimedia Controls
+    # Volume + Mic
     Key([], "XF86AudioRaiseVolume", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"), desc="Raise the volume"),
     Key([], "XF86AudioLowerVolume", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), desc="Lower the volume"),
     Key(["shift"], "XF86AudioRaiseVolume", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+"), desc="Raise the mic"),
     Key(["shift"], "XF86AudioLowerVolume", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-"), desc="Lower the mic"),
 
+    # Mute
     Key([], "XF86AudioMute", lazy.spawn("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), desc="Mute the volume"),
     Key([], "XF86AudioMicMute", lazy.spawn("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), desc="Mute the mic"),
 
+    # Brightness
     Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 5"), desc="Increase the screen brightness"),
     Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 5"), desc="Decrease the screen brightness"),
 
     # Alternative Multimedia Controls
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"), desc="Raise the volume"),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), desc="Lower the volume"),
-    Key(["shift"], "XF86AudioRaiseVolume", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+"), desc="Raise the mic"),
-    Key(["shift"], "XF86AudioLowerVolume", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-"), desc="Lower the mic"),
-
-    Key([], "XF86AudioMute", lazy.spawn("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), desc="Mute the volume"),
-    Key([], "XF86AudioMicMute", lazy.spawn("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), desc="Mute the mic"),
-
-    Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 5"), desc="Increase the screen brightness"),
-    Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 5"), desc="Decrease the screen brightness"),
+    Key([mod], "equal", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"), desc="Raise the volume"),
+    Key([mod], "minus", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), desc="Lower the volume"),
+    Key([mod, "shift"], "period", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+"), desc="Raise the mic"),
+    Key([mod, "shift"], "comma", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-"), desc="Lower the mic"),
+    Key([mod, "shift"], "equal", lazy.spawn("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), desc="Mute the volume"),
+    Key([mod, "shift"], "slash", lazy.spawn("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), desc="Mute the mic"),
+    Key([mod], "bracketright", lazy.spawn("xbacklight -inc 5"), desc="Increase the screen brightness"),
+    Key([mod], "bracketleft", lazy.spawn("xbacklight -dec 5"), desc="Decrease the screen brightness"),
 
     # Window Management
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
@@ -267,7 +269,7 @@ screens = [
                     ),
                 widget.TextBox(),
                 widget.TextBox(
-                    "",
+                    "󰋔",
                     fontsize = 22,
                     foreground = colors[7],
                     ),
@@ -313,7 +315,12 @@ bring_front_click = False
 floats_kept_above = True
 cursor_warp = False
 floating_layout = layout.Floating(
-    float_rules = []
+        float_rules = [
+            Match(title = "termfloat"),
+            ],
+        border_width = 2,
+        border_focus = colors[3],
+        border_normal = colors[8],
 )
 auto_fullscreen = True
 focus_on_window_activation = "smart"
