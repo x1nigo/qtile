@@ -201,12 +201,14 @@ screens = [
     Screen(
         top=bar.Bar(
             [
+                widget.TextBox(),
                 widget.TextBox(
                     "",
                     fontsize = 30,
                     foreground = colors[8],
                     mouse_callbacks = {"Button1": lazy.spawn(terminal)},
                     ),
+                widget.TextBox(" | "),
                 widget.GroupBox(
                     highlight_method = "line",
                     active = colors[7],
@@ -285,6 +287,7 @@ screens = [
                         foreground = colors[7],
                         ),
                 widget.Clock(format = "%Y %b %d (%a) %I:%M%p"),
+                widget.TextBox(),
             ],
             24,
             background = colors[0],
