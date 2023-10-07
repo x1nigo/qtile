@@ -36,6 +36,21 @@ myBrowser = "firefox"
 myFileManager = "lfrun"
 terminal = "st"
 audiomixer = "pulsemixer"
+emailClient = "neomutt"
+rssFeed = "newsboat"
+musicPlayer = "ncmpcpp"
+
+colors = [
+    ["#1a1b26", "#1a1b26"],
+    ["#161818", "#161818"],
+    ["#d0d0d0", "#d0d0d0"],
+    ["#500000", "#500000"],
+    ["#c3e88d", "#c3e88d"],
+    ["#ffcb6b", "#ffcb6b"],
+    ["#82aaff", "#82aaff"],
+    ["#a9b1f6", "#a9b1f6"],
+    ["#89ddff", "#89ddff"],
+    ]
 
 keys = [
     # Some basic commands.
@@ -44,19 +59,32 @@ keys = [
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen on the focused window",),
     Key([mod, "shift"], "Space", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
-    Key([mod], "F12", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "d", lazy.spawn("dmenu_run -l 30 -g 5 -z 800 -sb '#c687ff'"), desc="Spawn dmenu and open a program"),
+    Key([mod], "d", lazy.spawn("dmenu_run -l 30 -g 5 -z 800"), desc="Spawn dmenu and open a program"),
     Key([mod], "x", lazy.spawn("setbg -s"), desc="Set the background"),
     Key([mod], "grave", lazy.spawn("dmenumoji"), desc="Copy an emoji to the clipboard"),
     Key([mod], "BackSpace", lazy.spawn("sysmenu"), desc="Select a system action"),
-    Key([mod], "F2", lazy.spawn("fontwizard"), desc="Change system fonts"),
     Key([mod], "w", lazy.spawn(myBrowser), desc="Load up the browser"),
     Key([mod], "Insert", lazy.spawn("inserter"), desc="Insert a bookmark"),
+    Key([mod], "b", lazy.spawn("bookmarker"), desc="Append a bookmark"),
     Key([mod], "p", lazy.spawn("texfind"), desc="Find and display PDF files"),
-
     Key([mod], "r", lazy.spawn("{} -e {}" .format(terminal, myFileManager)), desc="Launch the file browser"),
+    Key([mod], "apostrophe", lazy.spawn(terminal + " -f monospace:size=16 -e bc -lq"), desc="Open a terminal calculator"),
+    Key([mod], "e", lazy.spawn(terminal + " -e " + emailClient), desc="Look up your email"),
+    Key([mod], "n", lazy.spawn(terminal + " -e " + rssFeed), desc="Read the news"),
+    Key([mod], "m", lazy.spawn(terminal + " -e " + musicPlayer), desc="Play music"),
+
+    # Function keys
+    Key([mod], "F1", lazy.spawn("readme"), desc="Navigate your way around the system"),
+    Key([mod], "F2", lazy.spawn("fontwizard"), desc="Change system fonts"),
     Key([mod], "F3", lazy.spawn("{} -e {}" .format(terminal, audiomixer)), desc="Open audio controls"),
+    Key([mod], "F4", lazy.spawn("selectdisplay"), desc="Configure display settings"),
+    Key([mod], "F5", lazy.spawn(terminal + " -e " + "nmtui"), desc="Connect to the internet"),
+    Key([mod], "F6", lazy.spawn("recorder"), desc="Record your screen and/or webcam"),
+    Key([mod], "F9", lazy.spawn("mounter"), desc="Mount USB drives and/or Android phones"),
+    Key([mod], "F10", lazy.spawn("unmounter"), desc="Unmount USB drives and/or Android phones"),
+    Key([mod], "F11", lazy.spawn("webcam"), desc="Unmount USB drives and/or Android phones"),
+    Key([mod], "F12", lazy.reload_config(), desc="Reload the config"),
 
     # Multimedia Controls
     Key([], "XF86AudioRaiseVolume", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"), desc="Raise the volume"),
@@ -66,6 +94,9 @@ keys = [
 
     Key([], "XF86AudioMute", lazy.spawn("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), desc="Mute the volume"),
     Key([], "XF86AudioMicMute", lazy.spawn("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), desc="Mute the mic"),
+
+    Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 5"), desc="Increase the screen brightness"),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 5"), desc="Decrease the screen brightness"),
 
     # Window Management
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
@@ -85,7 +116,7 @@ keys = [
     Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
-    Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+    Key([mod, "shift"], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
 
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
@@ -121,16 +152,18 @@ for i in groups:
         ]
     )
 
+my_layout = {
+        "border_width": 2,
+        "margin": 8,
+        "border_focus": colors[7],
+        "border_normal": colors[0],
+        "ratio": 0.5,
+        }
+
 layouts = [
-    layout.MonadTall(
-        border_width=2,
-        margin=12,
-        border_focus="#c687ff",
-        border_normal="#222222",
-        ratio=0.5,
-        ),
+    layout.MonadTall(**my_layout),
     layout.Max(),
-    # layout.Columns(),
+    layout.Columns(**my_layout),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
@@ -144,9 +177,9 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font="BlexMono Nerd Font Mono",
-    fontsize=12,
-    padding=3,
+    font = "BlexMono Nerd Font Mono",
+    fontsize = 12,
+    padding = 3,
 )
 extension_defaults = widget_defaults.copy()
 
@@ -157,67 +190,79 @@ screens = [
                 widget.TextBox(),
                 widget.TextBox(
                     "",
-                    fontsize=30,
-                    foreground="#c687ff",
+                    fontsize = 30,
+                    foreground = colors[7],
+                    mouse_callbacks = {"Button1": lazy.spawn(terminal)},
                     ),
                 widget.TextBox(),
                 widget.GroupBox(
-                    highlight_method="line",
-                    active="#c687ff",
-                    inactive="#ffffff",
-                    borderwidth=2,
-                    highlight_color="#0a0f14",
-                    this_current_screen_border="#c687ff",
-                    disable_drag=True,
+                    highlight_method = "line",
+                    active = colors[7],
+                    inactive = colors[2],
+                    borderwidth = 2,
+                    highlight_color = colors[1],
+                    this_current_screen_border = colors[7],
+                    disable_drag = True,
                     ),
                 widget.TextBox(" | "),
                 widget.CurrentLayoutIcon(),
                 widget.CurrentLayout(),
                 widget.TextBox(" | "),
-                widget.WindowName(),
+                widget.WindowName(
+                    foreground = colors[7],
+                    ),
                 widget.TextBox(
                     "󰒍",
-                    fontsize=25,
-                    foreground="#c687ff",
+                    fontsize = 22,
+                    foreground = colors[7],
                     ),
                 widget.Net(
-                    format="{down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}"
+                    format = "{down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}"
+                    ),
+                widget.TextBox(),
+                widget.TextBox(
+                    "󰃠",
+                    fontsize = 22,
+                    foreground = colors[7],
+                    ),
+                widget.Backlight(
+                    backlight_name = "intel_backlight",
                     ),
                 widget.TextBox(),
                 widget.TextBox(
                     "󰠓",
-                    fontsize=25,
-                    foreground="#c687ff",
+                    fontsize = 22,
+                    foreground = colors[7],
                    ),
                 widget.CryptoTicker(
-                    crypto="BTC",
-                    api="coinbase",
-                    format="{symbol}{amount:.2f}",
+                    crypto = "BTC",
+                    api = "coinbase",
+                    format = "{symbol}{amount:.2f}",
                     ),
                 widget.TextBox(),
                 widget.TextBox(
                     "",
-                    fontsize=25,
-                    foreground="#c687ff",
+                    fontsize = 22,
+                    foreground = colors[7],
                     ),
                 widget.Battery(
-                    battery=0,
-                    charge_char="^",
-                    discharge_char="V",
-                    empty_char="x",
-                    format="{char} {percent:2.0%}"
+                    battery = 0,
+                    charge_char = "^",
+                    discharge_char = "v",
+                    empty_char = "x",
+                    format = "{char} {percent:2.0%}"
                     ),
                 widget.TextBox(),
                 widget.TextBox(
                         "",
-                        fontsize=25,
-                        foreground="#c687ff",
+                        fontsize = 22,
+                        foreground = colors[7],
                         ),
-                widget.Clock(format="%Y %b %d (%a) %I:%M%p"),
+                widget.Clock(format = "%Y %b %d (%a) %I:%M%p"),
                 widget.TextBox(),
             ],
             20,
-            background="#1d2021df",
+            background = ["#1d2021df", "#1d2021ff"],
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
@@ -242,7 +287,7 @@ bring_front_click = False
 floats_kept_above = True
 cursor_warp = False
 floating_layout = layout.Floating(
-    float_rules=[]
+    float_rules = []
 )
 auto_fullscreen = True
 focus_on_window_activation = "smart"
