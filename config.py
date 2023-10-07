@@ -44,12 +44,12 @@ colors = [
     ["#161818ef", "#161818ff"], # bg
     ["#0a0f14", "#0a0f14"],
     ["#eeeeee", "#eeeeee"],
-    ["#500000", "#500000"],
-    ["#c3e88d", "#c3e88d"],
-    ["#ffcb6b", "#ffcb6b"],
-    ["#82aaff", "#82aaff"],
+    ["#f7768e", "#f7768e"],
+    ["#9ece6a", "#9ece6a"],
+    ["#e0af68", "#e0af68"],
+    ["#7aa2f7", "#7aa2f7"],
     ["#a9b1f6", "#a9b1f6"],
-    ["#444460", "#444460"],
+    ["#484868", "#484868"],
     ]
 
 keys = [
@@ -282,10 +282,10 @@ screens = [
                     ),
                 widget.TextBox(" | "),
                 widget.TextBox(
-                        "󱎫",
-                        fontsize = 20,
-                        foreground = colors[7],
-                        ),
+                    "󱎫",
+                    fontsize = 20,
+                    foreground = colors[7],
+                    ),
                 widget.Clock(format = "%Y %b %d (%a) %I:%M%p"),
                 widget.TextBox(),
             ],
