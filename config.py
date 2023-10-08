@@ -222,15 +222,26 @@ screens = [
                 widget.WindowName(
                     foreground = colors[5],
                     ),
+                #                 widget.TextBox(
+                #                     "",
+                #                     fontsize = 20,
+                #                     foreground = colors[5],
+                #                     ),
+#                 widget.ThermalZone(
+#                     format = "TEMP {temp}°C",
+#                     # Make the necessary changes for your machine.
+#                     zone = "/sys/devices/platform/coretemp.0/hwmon/hwmon7/temp1_input",
+#                     ),
+#                 widget.TextBox("|"),
                 widget.TextBox(
-                    "",
-                    fontsize = 20,
+                    "󰠓",
+                    fontsize = 21,
                     foreground = colors[5],
                     ),
-                widget.ThermalZone(
-                    format = "TEMP {temp}°C",
-                    # Make the necessary changes for your machine.
-                    zone = "/sys/devices/platform/coretemp.0/hwmon/hwmon7/temp1_input",
+                widget.CryptoTicker(
+                    crypto = "BTC",
+                    api = "coinbase",
+                    format = "{symbol}{amount:.2f}",
                     ),
                 widget.TextBox("|"),
                 widget.TextBox(
@@ -247,17 +258,6 @@ screens = [
                     ),
                 widget.Memory(
                     format = "MEM {MemPercent}%",
-                    ),
-                widget.TextBox("|"),
-                widget.TextBox(
-                    "󰠓",
-                    fontsize = 20,
-                    foreground = colors[5],
-                    ),
-                widget.CryptoTicker(
-                    crypto = "BTC",
-                    api = "coinbase",
-                    format = "{symbol}{amount:.2f}",
                     ),
                 widget.TextBox("|"),
                 widget.TextBox(
