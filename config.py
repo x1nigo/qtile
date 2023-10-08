@@ -155,7 +155,7 @@ for i in groups:
         ]
     )
 
-colors = colors.myTheme
+colors = colors.TokyoNight
 
 my_layout = {
         "border_width": 2,
