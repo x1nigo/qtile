@@ -159,7 +159,7 @@ colors = colors.TokyoNight
 
 my_layout = {
         "border_width": 2,
-        "margin": 8,
+        "margin": 12,
         "border_focus": colors[15],
         "border_normal": colors[0],
         "border_on_single": True,
