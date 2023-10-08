@@ -35,6 +35,7 @@ import colors
 mod = "mod4"
 myBrowser = "firefox"
 myFileManager = "lfrun"
+backupFM = "fff"
 terminal = "st"
 audiomixer = "pulsemixer"
 emailClient = "neomutt"
@@ -45,6 +46,8 @@ keys = [
     # Some basic commands.
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod, "shift"], "Return", lazy.spawn("floater"), desc="Launch floating terminal"),
+    Key([mod], "r", lazy.spawn("{} -e {}" .format(terminal, myFileManager)), desc="Launch the file browser"),
+    Key([mod, "shift"], "r", lazy.spawn(terminal + " -e " + backupFM), desc="Launch the backup file browser"),
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen on the focused window",),
@@ -58,7 +61,6 @@ keys = [
     Key([mod], "Insert", lazy.spawn("inserter"), desc="Insert a bookmark"),
     Key([mod], "b", lazy.spawn("bookmarker"), desc="Append a bookmark"),
     Key([mod], "p", lazy.spawn("texfind"), desc="Find and display PDF files"),
-    Key([mod], "r", lazy.spawn("{} -e {}" .format(terminal, myFileManager)), desc="Launch the file browser"),
     Key([mod], "apostrophe", lazy.spawn(terminal + " -t termfloat -f monospace:size=16 -g 50x20 -e bc -lq"), desc="Open a terminal calculator"),
     Key([mod], "e", lazy.spawn(terminal + " -e " + emailClient), desc="Look up your email"),
     Key([mod], "n", lazy.spawn(terminal + " -e " + rssFeed), desc="Read the news"),
@@ -183,8 +185,8 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font = "FantasqueSansM Nerd Font Mono",
-    fontsize = 13,
+    font = "CaskaydiaCove Nerd Font Mono",
+    fontsize = 12,
     padding = 5,
 )
 extension_defaults = widget_defaults.copy()
@@ -217,13 +219,16 @@ screens = [
                 widget.WindowName(
                     foreground = colors[5],
                     ),
+                widget.TextBox(),
                 widget.TextBox(
-                    "󰗣",
+                    "",
                     fontsize = 20,
-                    foreground = colors[6],
+                    foreground = colors[5],
                     ),
                 widget.ThermalZone(
-                    format = " TEMP {temp}°C"
+                    format = "TEMP {temp}°C",
+                    # Make the necessary changes for your machine.
+                    zone = "/sys/devices/platform/coretemp.0/hwmon/hwmon7/temp1_input",
                     ),
                 widget.TextBox("|"),
                 widget.TextBox(
@@ -292,7 +297,7 @@ screens = [
                 widget.Clock(format = "%Y %b %d (%a) %I:%M%p"),
                 widget.TextBox(),
             ],
-            24,
+            21,
             background = colors[0],
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
