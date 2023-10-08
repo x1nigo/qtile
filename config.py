@@ -70,7 +70,7 @@ keys = [
     Key([mod], "b", lazy.spawn("bookmarker"), desc="Append a bookmark"),
     Key([mod], "p", lazy.spawn("texfind"), desc="Find and display PDF files"),
     Key([mod], "r", lazy.spawn("{} -e {}" .format(terminal, myFileManager)), desc="Launch the file browser"),
-    Key([mod], "apostrophe", lazy.spawn(terminal + " -f monospace:size=16 -e bc -lq"), desc="Open a terminal calculator"),
+    Key([mod], "apostrophe", lazy.spawn(terminal + " -t termfloat -f monospace:size=16 -g 50x20 -e bc -lq"), desc="Open a terminal calculator"),
     Key([mod], "e", lazy.spawn(terminal + " -e " + emailClient), desc="Look up your email"),
     Key([mod], "n", lazy.spawn(terminal + " -e " + rssFeed), desc="Read the news"),
     Key([mod], "m", lazy.spawn(terminal + " -e " + musicPlayer), desc="Play music"),
