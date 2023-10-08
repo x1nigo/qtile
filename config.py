@@ -30,6 +30,7 @@ from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 import os
 import psutil
+import colors
 
 mod = "mod4"
 myBrowser = "firefox"
@@ -39,18 +40,6 @@ audiomixer = "pulsemixer"
 emailClient = "neomutt"
 rssFeed = "newsboat"
 musicPlayer = "ncmpcpp"
-
-colors = [
-    ["#161818ef", "#161818ff"], # bg
-    ["#0a0f14", "#0a0f14"],
-    ["#eeeeee", "#eeeeee"],
-    ["#ff5555", "#ff5555"],
-    ["#9ece6a", "#9ece6a"],
-    ["#e0af68", "#e0af68"],
-    ["#7aa2f7", "#7aa2f7"],
-    ["#a9b1f6", "#a9b1f6"],
-    ["#484868", "#484868"],
-    ]
 
 keys = [
     # Some basic commands.
@@ -166,10 +155,12 @@ for i in groups:
         ]
     )
 
+colors = colors.myTheme
+
 my_layout = {
         "border_width": 2,
         "margin": 8,
-        "border_focus": colors[2],
+        "border_focus": colors[15],
         "border_normal": colors[0],
         "border_on_single": True,
         "ratio": 0.5,
@@ -206,17 +197,17 @@ screens = [
                 widget.TextBox(
                     "",
                     fontsize = 30,
-                    foreground = colors[8],
+                    foreground = colors[6],
                     mouse_callbacks = {"Button1": lazy.spawn(terminal)},
                     ),
                 widget.TextBox(" | "),
                 widget.GroupBox(
                     highlight_method = "line",
-                    active = colors[7],
-                    inactive = colors[2],
+                    active = colors[6],
+                    inactive = colors[15],
                     borderwidth = 2,
-                    highlight_color = colors[1],
-                    this_current_screen_border = colors[7],
+                    highlight_color = colors[8],
+                    this_current_screen_border = colors[6],
                     disable_drag = True,
                     ),
                 widget.TextBox(" | "),
@@ -224,19 +215,19 @@ screens = [
                 widget.CurrentLayout(),
                 widget.TextBox(" | "),
                 widget.WindowName(
-                    foreground = colors[8],
+                    foreground = colors[6],
                     ),
                 widget.TextBox(
                     "",
                     fontsize = 20,
-                    foreground = colors[7],
+                    foreground = colors[6],
                     ),
                 widget.CPU(),
                 widget.TextBox(" | "),
                 widget.TextBox(
                     "󰝫",
                     fontsize = 20,
-                    foreground = colors[7],
+                    foreground = colors[3],
                     ),
                 widget.Memory(
                     format = "MEM {MemPercent}%",
@@ -245,7 +236,7 @@ screens = [
                 widget.TextBox(
                     "󰠓",
                     fontsize = 20,
-                    foreground = colors[7],
+                    foreground = colors[5],
                     ),
                 widget.CryptoTicker(
                     crypto = "BTC",
@@ -256,7 +247,7 @@ screens = [
                 widget.TextBox(
                     "󰃠",
                     fontsize = 20,
-                    foreground = colors[7],
+                    foreground = colors[4],
                     ),
                 widget.Backlight(
                     backlight_name = "intel_backlight",
@@ -265,7 +256,7 @@ screens = [
                 widget.TextBox(
                     "󰒍",
                     fontsize = 20,
-                    foreground = colors[7],
+                    foreground = colors[6],
                     ),
                 widget.Net(
                     format = "{down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}"
@@ -274,7 +265,7 @@ screens = [
                 widget.TextBox(
                     "󰋔",
                     fontsize = 20,
-                    foreground = colors[7],
+                    foreground = colors[3],
                     ),
                 widget.Battery(
                     battery = 0,
