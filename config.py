@@ -200,7 +200,10 @@ screens = [
                     "",
                     fontsize = 30,
                     foreground = colors[5],
-                    mouse_callbacks = {"Button1": lazy.spawn(terminal)},
+                    mouse_callbacks = {
+                        "Button1": lazy.spawn("dmenu_run -l 30 -g 5 -z 800"),
+                        "Button3": lazy.spawn(terminal),
+                        },
                     ),
                 widget.TextBox("|"),
                 widget.GroupBox(
