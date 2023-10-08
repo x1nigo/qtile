@@ -131,7 +131,17 @@ keys = [
     Key([mod, "control"], "t", lazy.layout.toggle_split(), desc="Toggle between split and unsplit sides of stack",),
 ]
 
-groups = [Group(i) for i in "123456789"]
+groups = []
+group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+# group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+group_labels = ["www", "dev", "doc", "img", "vid", "vbox", "mus", "sys", "gfx"]
+
+for i in range(len(group_names)):
+    groups.append(
+        Group(
+            name = group_names[i],
+            label = group_labels[i],
+        ))
 
 for i in groups:
     keys.extend(
