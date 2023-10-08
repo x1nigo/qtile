@@ -169,8 +169,9 @@ for i in groups:
 my_layout = {
         "border_width": 2,
         "margin": 8,
-        "border_focus": colors[7],
+        "border_focus": colors[2],
         "border_normal": colors[0],
+        "border_on_single": True,
         "ratio": 0.5,
         }
 
@@ -179,8 +180,8 @@ layouts = [
     layout.Max(),
     layout.MonadWide(**my_layout),
     layout.Columns(**my_layout),
+    layout.Stack(**my_layout, num_stacks=2),
     # Try more layouts by unleashing below layouts.
-    # layout.Stack(num_stacks=2),
     # layout.Bsp(),
     # layout.Matrix(),
     # layout.RatioTile(),
@@ -226,24 +227,26 @@ screens = [
                     foreground = colors[8],
                     ),
                 widget.TextBox(
-                    "󰄫",
+                    "",
                     fontsize = 20,
                     foreground = colors[7],
                     ),
                 widget.CPU(),
                 widget.TextBox(" | "),
                 widget.TextBox(
-                    "󰄧",
+                    "󰝫",
                     fontsize = 20,
                     foreground = colors[7],
                     ),
-                widget.Memory(),
+                widget.Memory(
+                    format = "MEM {MemPercent}%",
+                    ),
                 widget.TextBox(" | "),
                 widget.TextBox(
                     "󰠓",
                     fontsize = 20,
                     foreground = colors[7],
-                   ),
+                    ),
                 widget.CryptoTicker(
                     crypto = "BTC",
                     api = "coinbase",
@@ -282,7 +285,7 @@ screens = [
                     ),
                 widget.TextBox(" | "),
                 widget.TextBox(
-                    "󱎫",
+                    "󰥔",
                     fontsize = 20,
                     foreground = colors[7],
                     ),
