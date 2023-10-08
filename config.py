@@ -200,7 +200,7 @@ screens = [
                     foreground = colors[5],
                     mouse_callbacks = {"Button1": lazy.spawn(terminal)},
                     ),
-                widget.TextBox(" | "),
+                widget.TextBox("|"),
                 widget.GroupBox(
                     highlight_method = "line",
                     active = colors[6],
@@ -210,20 +210,29 @@ screens = [
                     this_current_screen_border = colors[6],
                     disable_drag = True,
                     ),
-                widget.TextBox(" | "),
+                widget.TextBox("|"),
                 widget.CurrentLayoutIcon(),
                 widget.CurrentLayout(),
-                widget.TextBox(" | "),
+                widget.TextBox("|"),
                 widget.WindowName(
+                    foreground = colors[5],
+                    ),
+                widget.TextBox(
+                    "󰗣",
+                    fontsize = 20,
                     foreground = colors[6],
                     ),
+                widget.ThermalZone(
+                    format = " TEMP {temp}°C"
+                    ),
+                widget.TextBox("|"),
                 widget.TextBox(
                     "",
                     fontsize = 20,
                     foreground = colors[6],
                     ),
                 widget.CPU(),
-                widget.TextBox(" | "),
+                widget.TextBox("|"),
                 widget.TextBox(
                     "󰝫",
                     fontsize = 20,
@@ -232,7 +241,7 @@ screens = [
                 widget.Memory(
                     format = "MEM {MemPercent}%",
                     ),
-                widget.TextBox(" | "),
+                widget.TextBox("|"),
                 widget.TextBox(
                     "󰠓",
                     fontsize = 20,
@@ -243,7 +252,7 @@ screens = [
                     api = "coinbase",
                     format = "{symbol}{amount:.2f}",
                     ),
-                widget.TextBox(" | "),
+                widget.TextBox("|"),
                 widget.TextBox(
                     "󰃠",
                     fontsize = 20,
@@ -252,7 +261,7 @@ screens = [
                 widget.Backlight(
                     backlight_name = "intel_backlight",
                     ),
-                widget.TextBox(" | "),
+                widget.TextBox("|"),
                 widget.TextBox(
                     "󰒍",
                     fontsize = 20,
@@ -261,7 +270,7 @@ screens = [
                 widget.Net(
                     format = "{down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}"
                     ),
-                widget.TextBox(" | "),
+                widget.TextBox("|"),
                 widget.TextBox(
                     "󰋔",
                     fontsize = 20,
@@ -274,7 +283,7 @@ screens = [
                     empty_char = "x",
                     format = "{char}: {percent:2.0%}"
                     ),
-                widget.TextBox(" | "),
+                widget.TextBox("|"),
                 widget.TextBox(
                     "󰥔",
                     fontsize = 20,
