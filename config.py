@@ -183,8 +183,8 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font = "BlexMono Nerd Font Mono",
-    fontsize = 12,
+    font = "FantasqueSansM Nerd Font Mono",
+    fontsize = 13,
     padding = 5,
 )
 extension_defaults = widget_defaults.copy()
@@ -197,7 +197,7 @@ screens = [
                 widget.TextBox(
                     "",
                     fontsize = 30,
-                    foreground = colors[6],
+                    foreground = colors[5],
                     mouse_callbacks = {"Button1": lazy.spawn(terminal)},
                     ),
                 widget.TextBox(" | "),
