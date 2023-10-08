@@ -15,6 +15,7 @@ GruvboxDark = [
     ["#d3869b", "#d3869b"],
     ["#8ec07c", "#8ec07c"],
     ["#ebdbb2", "#ebdbb2"],
+    ["#500000", "#500000"], # Custom border color
     ]
 
 myTheme = [
@@ -34,6 +35,7 @@ myTheme = [
     ["#A4799D", "#A4799D"],
     ["#3F94A8", "#3F94A8"],
     ["#EBEDF2", "#EBEDF2"],
+    ["#500000", "#500000"], # Custom border color
     ]
 
 TokyoNight = [
@@ -53,4 +55,5 @@ TokyoNight = [
     ["#BB9AF7", "#BB9AF7"],
     ["#7DCFFF", "#7DCFFF"],
     ["#C0CAF5", "#C0CAF5"],
+    ["#500000", "#500000"], # Custom border color
     ]

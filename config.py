@@ -160,9 +160,9 @@ for i in groups:
 colors = colors.TokyoNight
 
 my_layout = {
-        "border_width": 2,
-        "margin": 12,
-        "border_focus": colors[15],
+        "border_width": 3,
+        "margin": 8,
+        "border_focus": colors[16],
         "border_normal": colors[0],
         "border_on_single": True,
         "ratio": 0.5,
@@ -219,7 +219,6 @@ screens = [
                 widget.WindowName(
                     foreground = colors[5],
                     ),
-                widget.TextBox(),
                 widget.TextBox(
                     "",
                     fontsize = 20,
@@ -259,7 +258,7 @@ screens = [
                     ),
                 widget.TextBox("|"),
                 widget.TextBox(
-                    "󰃠",
+                    "󰛨",
                     fontsize = 20,
                     foreground = colors[4],
                     ),
@@ -277,9 +276,9 @@ screens = [
                     ),
                 widget.TextBox("|"),
                 widget.TextBox(
-                    "󰋔",
+                    "󰄌",
                     fontsize = 20,
-                    foreground = colors[3],
+                    foreground = colors[1],
                     ),
                 widget.Battery(
                     battery = 0,
@@ -326,8 +325,8 @@ floating_layout = layout.Floating(
         float_rules = [
             Match(title = "termfloat"),  # floating terminal
             ],
-        border_width = 2,
-        border_focus = colors[7],
+        border_width = 3,
+        border_focus = colors[16],
         border_normal = colors[8],
 )
 auto_fullscreen = True
