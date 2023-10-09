@@ -38,6 +38,9 @@ mod = "mod4"
 terminal = "st"
 borderWidth = 2
 gaps = 8
+myFont = "CaskaydiaCove Nerd Font Mono"
+myFontSize = 12
+myPadding = 5
 
 # Programs
 myBrowser = "firefox"
@@ -201,9 +204,9 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font = "CaskaydiaCove Nerd Font Mono",
-    fontsize = 12,
-    padding = 5,
+    font = myFont,
+    fontsize = myFontSize,
+    padding = myPadding
 )
 extension_defaults = widget_defaults.copy()
 

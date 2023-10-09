@@ -55,5 +55,5 @@ TokyoNight = [
     ["#989AF7", "#989AF7"],
     ["#7DCFFF", "#7DCFFF"],
     ["#C0CAF5", "#C0CAF5"],
-    ["#989af7", "#989af7"], # Custom border color
+    ["#eeeeee", "#eeeeee"], # Custom border color
     ]
