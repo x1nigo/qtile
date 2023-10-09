@@ -41,7 +41,7 @@ gaps = 8
 myFont = "CaskaydiaCove Nerd Font Mono"
 myFontSize = 12
 iconSize = 22
-mainIconSize = 35
+mainIconSize = 30
 myPadding = 5
 
 # Programs
@@ -334,7 +334,7 @@ screens = [
                 widget.Clock(format = "%Y %b %d (%a) %I:%M%p"),
                 widget.TextBox(),
             ],
-            24,
+            21,
             background = colors[0],
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
