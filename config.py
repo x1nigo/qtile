@@ -38,7 +38,7 @@ mod = "mod4"
 terminal = "st"
 borderWidth = 2
 gaps = 8
-myFont = "CaskaydiaCove Nerd Font Mono"
+myFont = "BlexMono Nerd Font Mono"
 myFontSize = 12
 myPadding = 5
 
