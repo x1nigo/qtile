@@ -38,8 +38,10 @@ mod = "mod4"
 terminal = "st"
 borderWidth = 2
 gaps = 8
-myFont = "BlexMono Nerd Font Mono"
+myFont = "CaskaydiaCove Nerd Font Mono"
 myFontSize = 12
+iconSize = 22
+mainIconSize = 35
 myPadding = 5
 
 # Programs
@@ -217,7 +219,7 @@ screens = [
                 widget.TextBox(),
                 widget.TextBox(
                     "",
-                    fontsize = 30,
+                    fontsize = mainIconSize,
                     foreground = colors[5],
                     mouse_callbacks = {
                         "Button1": lazy.spawn("dmenu_run -l 30 -g 5 -z 800"),
@@ -241,38 +243,38 @@ screens = [
                 widget.WindowName(
                     foreground = colors[5],
                     ),
-                #                 widget.TextBox(
-                #                     "",
-                #                     fontsize = 20,
-                #                     foreground = colors[5],
-                #                     ),
+#                 widget.TextBox(
+#                     "",
+#                     fontsize = iconSize,
+#                     foreground = colors[5],
+#                     ),
 #                 widget.ThermalZone(
 #                     format = "TEMP {temp}°C",
 #                     # Make the necessary changes for your machine.
 #                     zone = "/sys/devices/platform/coretemp.0/hwmon/hwmon7/temp1_input",
 #                     ),
 #                 widget.TextBox("|"),
-                widget.TextBox(
-                    "󰠓",
-                    fontsize = 21,
-                    foreground = colors[5],
-                    ),
-                widget.CryptoTicker(
-                    crypto = "BTC",
-                    api = "coinbase",
-                    format = "BTC {symbol}{amount:.2f}",
-                    ),
+#                 widget.TextBox(
+#                     "󰠓",
+#                     fontsize = iconSize,
+#                     foreground = colors[5],
+#                     ),
+#                 widget.CryptoTicker(
+#                     crypto = "BTC",
+#                     api = "coinbase",
+#                     format = "BTC {symbol}{amount:.2f}",
+#                     ),
                 widget.TextBox("|"),
                 widget.TextBox(
                     "",
-                    fontsize = 20,
+                    fontsize = iconSize,
                     foreground = colors[6],
                     ),
                 widget.CPU(),
                 widget.TextBox("|"),
                 widget.TextBox(
                     "󰝫",
-                    fontsize = 20,
+                    fontsize = iconSize,
                     foreground = colors[3],
                     ),
                 widget.Memory(
@@ -281,7 +283,7 @@ screens = [
                 widget.TextBox("|"),
                 widget.TextBox(
                     "󰛨",
-                    fontsize = 20,
+                    fontsize = iconSize,
                     foreground = colors[4],
                     ),
                 widget.Backlight(
@@ -289,9 +291,22 @@ screens = [
                     format = "BRI {percent:2.0%}",
                     ),
                 widget.TextBox("|"),
+                # I only used this since there's no Pipewire support in qtile yet.
+                widget.TextBox(
+                    "",
+                    fontsize = iconSize,
+                    foreground = colors[5],
+                    ),
+                widget.GenPollCommand(
+                    shell = True,
+                    cmd = "pulsemixer --get-volume | cut -d' ' -f1",
+                    fmt = "VOL {}%",
+                    update_interval = 5,
+                    ),
+                widget.TextBox("|"),
                 widget.TextBox(
                     "󰒍",
-                    fontsize = 20,
+                    fontsize = iconSize,
                     foreground = colors[6],
                     ),
                 widget.Net(
@@ -300,7 +315,7 @@ screens = [
                 widget.TextBox("|"),
                 widget.TextBox(
                     "󰄌",
-                    fontsize = 20,
+                    fontsize = iconSize,
                     foreground = colors[1],
                     ),
                 widget.Battery(
@@ -313,13 +328,13 @@ screens = [
                 widget.TextBox("|"),
                 widget.TextBox(
                     "󰥔",
-                    fontsize = 20,
+                    fontsize = iconSize,
                     foreground = colors[7],
                     ),
                 widget.Clock(format = "%Y %b %d (%a) %I:%M%p"),
                 widget.TextBox(),
             ],
-            21,
+            24,
             background = colors[0],
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
