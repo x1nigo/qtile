@@ -186,11 +186,11 @@ my_layout = {
         "border_focus": colors[16],
         "border_normal": colors[0],
         "border_on_single": True,
-        "ratio": 0.5,
+        "ratio": 0.55,
         }
 
 layouts = [
-    layout.MonadTall(**my_layout),
+    layout.MonadTall(**my_layout, new_client_position="bottom"),
     layout.Max(),
     layout.MonadWide(**my_layout),
     layout.Columns(**my_layout),
