@@ -32,11 +32,17 @@ import os
 import psutil
 import colors
 
+
+# Variables for the window manager
 mod = "mod4"
+terminal = "st"
+borderWidth = 2
+gaps = 8
+
+# Programs
 myBrowser = "firefox"
 myFileManager = "lfrun"
 backupFM = "fff"
-terminal = "st"
 audiomixer = "pulsemixer"
 emailClient = "neomutt"
 rssFeed = "newsboat"
@@ -85,11 +91,11 @@ keys = [
     Key(["shift"], "XF86AudioRaiseVolume", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+"), desc="Raise the mic"),
     Key(["shift"], "XF86AudioLowerVolume", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-"), desc="Lower the mic"),
 
-    # Mute
+    # Mute Controls
     Key([], "XF86AudioMute", lazy.spawn("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), desc="Mute the volume"),
     Key([], "XF86AudioMicMute", lazy.spawn("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), desc="Mute the mic"),
 
-    # Brightness
+    # Backlight Controls
     Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 5"), desc="Increase the screen brightness"),
     Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 5"), desc="Decrease the screen brightness"),
 
@@ -170,8 +176,8 @@ for i in groups:
 colors = colors.TokyoNight
 
 my_layout = {
-        "border_width": 2,
-        "margin": 8,
+        "border_width": borderWidth,
+        "margin": gaps,
         "border_focus": colors[16],
         "border_normal": colors[0],
         "border_on_single": True,
@@ -218,7 +224,7 @@ screens = [
                 widget.TextBox("|"),
                 widget.GroupBox(
                     highlight_method = "line",
-                    active = colors[5],
+                    active = colors[6],
                     inactive = colors[15],
                     borderwidth = 2,
                     highlight_color = colors[8],
@@ -251,7 +257,7 @@ screens = [
                 widget.CryptoTicker(
                     crypto = "BTC",
                     api = "coinbase",
-                    format = "{symbol}{amount:.2f}",
+                    format = "BTC {symbol}{amount:.2f}",
                     ),
                 widget.TextBox("|"),
                 widget.TextBox(
@@ -277,6 +283,7 @@ screens = [
                     ),
                 widget.Backlight(
                     backlight_name = "intel_backlight",
+                    format = "BRI {percent:2.0%}",
                     ),
                 widget.TextBox("|"),
                 widget.TextBox(
@@ -285,7 +292,7 @@ screens = [
                     foreground = colors[6],
                     ),
                 widget.Net(
-                    format = "{down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}"
+                    format = "NET {down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}"
                     ),
                 widget.TextBox("|"),
                 widget.TextBox(
@@ -298,7 +305,7 @@ screens = [
                     charge_char = "^",
                     discharge_char = "v",
                     empty_char = "x",
-                    format = "{char}: {percent:2.0%}"
+                    format = "BAT {char}: {percent:2.0%}"
                     ),
                 widget.TextBox("|"),
                 widget.TextBox(
@@ -338,7 +345,7 @@ floating_layout = layout.Floating(
         float_rules = [
             Match(title = "termfloat"),  # floating terminal
             ],
-        border_width = 2,
+        border_width = borderWidth,
         border_focus = colors[16],
         border_normal = colors[8],
 )

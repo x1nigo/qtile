@@ -39,7 +39,7 @@ myTheme = [
     ]
 
 TokyoNight = [
-    ["#1d2021", "#1d2021"],
+    ["#1d202198", "#1d2021ff"],
     ["#F7768E", "#F7768E"],
     ["#9ECE6A", "#9ECE6A"],
     ["#E0AF68", "#E0AF68"],
@@ -55,5 +55,5 @@ TokyoNight = [
     ["#989AF7", "#989AF7"],
     ["#7DCFFF", "#7DCFFF"],
     ["#C0CAF5", "#C0CAF5"],
-    ["#eeeeee", "#eeeeee"], # Custom border color
+    ["#989af7", "#989af7"], # Custom border color
     ]
