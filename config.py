@@ -133,8 +133,8 @@ keys = [
 
 groups = []
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-# group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-group_labels = ["www", "dev", "doc", "img", "vid", "vbox", "mus", "sys", "gfx"]
+group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+# group_labels = ["dev", "web", "dox", "img", "vid", "vbox", "mus", "sys", "gfx"]
 
 for i in range(len(group_names)):
     groups.append(
@@ -170,7 +170,7 @@ for i in groups:
 colors = colors.TokyoNight
 
 my_layout = {
-        "border_width": 3,
+        "border_width": 2,
         "margin": 8,
         "border_focus": colors[16],
         "border_normal": colors[0],
@@ -218,11 +218,11 @@ screens = [
                 widget.TextBox("|"),
                 widget.GroupBox(
                     highlight_method = "line",
-                    active = colors[6],
+                    active = colors[5],
                     inactive = colors[15],
                     borderwidth = 2,
                     highlight_color = colors[8],
-                    this_current_screen_border = colors[6],
+                    this_current_screen_border = colors[5],
                     disable_drag = True,
                     ),
                 widget.TextBox("|"),
@@ -338,7 +338,7 @@ floating_layout = layout.Floating(
         float_rules = [
             Match(title = "termfloat"),  # floating terminal
             ],
-        border_width = 3,
+        border_width = 2,
         border_focus = colors[16],
         border_normal = colors[8],
 )
