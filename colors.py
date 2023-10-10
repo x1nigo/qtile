@@ -15,7 +15,7 @@ GruvboxDark = [
     ["#d3869b", "#d3869b"],
     ["#8ec07c", "#8ec07c"],
     ["#ebdbb2", "#ebdbb2"],
-    ["#eeeeee", "#eeeeee"], # Custom border color
+    ["#500000", "#500000"], # Custom border color
     ]
 
 TokyoNight = [
@@ -35,7 +35,7 @@ TokyoNight = [
     ["#989AF7", "#989AF7"],
     ["#7DCFFF", "#7DCFFF"],
     ["#C0CAF5", "#C0CAF5"],
-    ["#eeeeee", "#eeeeee"], # Custom border color
+    ["#500000", "#500000"], # Custom border color
     ]
 
 Nord = [
@@ -55,5 +55,5 @@ Nord = [
     ["#B48EAD", "#B48EAD"],
     ["#8FBCBB", "#8FBCBB"],
     ["#ECEFF4", "#ECEFF4"],
-    ["#eeeeee", "#eeeeee"], # Custom border color
+    ["#500000", "#500000"], # Custom border color
     ]

@@ -36,7 +36,7 @@ import colors
 # Variables for the window manager
 mod = "mod4"
 terminal = "st"
-borderWidth = 2
+borderWidth = 3
 gaps = 8
 myFont = "BlexMono Nerd Font Mono Bold"
 myFontSize = 12
@@ -326,10 +326,10 @@ screens = [
                     ),
                 widget.Battery(
                     battery = 0,
-                    charge_char = "+",
+                    charge_char = " +",
                     discharge_char = "",
-                    empty_char = "x",
-                    format = "BAT {percent:2.0%} +"
+                    empty_char = " x",
+                    format = "BAT {percent:2.0%}{char}"
                     ),
                 widget.TextBox("|"),
                 widget.TextBox(
