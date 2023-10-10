@@ -326,10 +326,10 @@ screens = [
                     ),
                 widget.Battery(
                     battery = 0,
-                    charge_char = "^",
-                    discharge_char = "v",
+                    charge_char = "+",
+                    discharge_char = "",
                     empty_char = "x",
-                    format = "BAT {char}: {percent:2.0%}"
+                    format = "BAT {percent:2.0%} +"
                     ),
                 widget.TextBox("|"),
                 widget.TextBox(
