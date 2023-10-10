@@ -37,3 +37,23 @@ TokyoNight = [
     ["#C0CAF5", "#C0CAF5"],
     ["#eeeeee", "#eeeeee"], # Custom border color
     ]
+
+Nord = [
+    ["#121218", "#121218"],
+    ["#BF616A", "#BF616A"],
+    ["#A3BE8C", "#A3BE8C"],
+    ["#EBCB8B", "#EBCB8B"],
+    ["#81A1C1", "#81A1C1"],
+    ["#B48EAD", "#B48EAD"],
+    ["#88C0D0", "#88C0D0"],
+    ["#E5E9F0", "#E5E9F0"],
+    ["#181818", "#181818"],
+    ["#BF616A", "#BF616A"],
+    ["#A3BE8C", "#A3BE8C"],
+    ["#EBCB8B", "#EBCB8B"],
+    ["#81A1C1", "#81A1C1"],
+    ["#B48EAD", "#B48EAD"],
+    ["#8FBCBB", "#8FBCBB"],
+    ["#ECEFF4", "#ECEFF4"],
+    ["#eeeeee", "#eeeeee"], # Custom border color
+    ]

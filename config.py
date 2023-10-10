@@ -178,7 +178,7 @@ for i in groups:
         ]
     )
 
-colors = colors.TokyoNight
+colors = colors.Nord
 
 my_layout = {
         "border_width": borderWidth,
@@ -220,7 +220,7 @@ screens = [
                 widget.TextBox(
                     "",
                     fontsize = mainIconSize,
-                    foreground = colors[5],
+                    foreground = colors[6],
                     mouse_callbacks = {
                         "Button1": lazy.spawn("dmenu_run -l 30 -g 5 -z 800"),
                         "Button3": lazy.spawn(terminal),
@@ -233,7 +233,7 @@ screens = [
                     inactive = colors[15],
                     borderwidth = 2,
                     highlight_color = colors[8],
-                    this_current_screen_border = colors[5],
+                    this_current_screen_border = colors[6],
                     disable_drag = True,
                     ),
                 widget.TextBox("|"),
@@ -241,7 +241,7 @@ screens = [
                 widget.CurrentLayout(),
                 widget.TextBox("|"),
                 widget.WindowName(
-                    foreground = colors[5],
+                    foreground = colors[6],
                     ),
 #                 widget.TextBox(
 #                     "",
@@ -253,17 +253,17 @@ screens = [
 #                     # Make the necessary changes for your machine.
 #                     zone = "/sys/devices/platform/coretemp.0/hwmon/hwmon7/temp1_input",
 #                     ),
-#                 widget.TextBox("|"),
-#                 widget.TextBox(
-#                     "󰠓",
-#                     fontsize = iconSize,
-#                     foreground = colors[5],
-#                     ),
-#                 widget.CryptoTicker(
-#                     crypto = "BTC",
-#                     api = "coinbase",
-#                     format = "BTC {symbol}{amount:.2f}",
-#                     ),
+                widget.TextBox("|"),
+                widget.TextBox(
+                    "󰠓",
+                    fontsize = iconSize,
+                    foreground = colors[5],
+                    ),
+                widget.CryptoTicker(
+                    crypto = "BTC",
+                    api = "coinbase",
+                    format = "BTC {symbol}{amount:.2f}",
+                    ),
                 widget.TextBox("|"),
                 widget.TextBox(
                     "",
@@ -293,7 +293,7 @@ screens = [
                 widget.TextBox("|"),
                 # I only used this since there's no Pipewire support in qtile yet.
                 widget.TextBox(
-                    "",
+                    "󱄠",
                     fontsize = iconSize,
                     foreground = colors[5],
                     ),
@@ -314,7 +314,7 @@ screens = [
                     ),
                 widget.TextBox("|"),
                 widget.TextBox(
-                    "󰄌",
+                    "",
                     fontsize = iconSize,
                     foreground = colors[1],
                     ),
