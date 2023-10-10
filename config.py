@@ -38,7 +38,7 @@ mod = "mod4"
 terminal = "st"
 borderWidth = 2
 gaps = 8
-myFont = "CaskaydiaCove Nerd Font Mono"
+myFont = "BlexMono Nerd Font Mono Bold"
 myFontSize = 12
 iconSize = 22
 mainIconSize = 30
@@ -186,7 +186,7 @@ my_layout = {
         "border_focus": colors[16],
         "border_normal": colors[0],
         "border_on_single": True,
-        "ratio": 0.55,
+        "ratio": 0.5,
         }
 
 layouts = [
@@ -220,7 +220,7 @@ screens = [
                 widget.TextBox(
                     "",
                     fontsize = mainIconSize,
-                    foreground = colors[5],
+                    foreground = colors[6],
                     mouse_callbacks = {
                         "Button1": lazy.spawn("dmenu_run -l 30 -g 5 -z 800"),
                         "Button3": lazy.spawn(terminal),
@@ -241,7 +241,7 @@ screens = [
                 widget.CurrentLayout(),
                 widget.TextBox("|"),
                 widget.WindowName(
-                    foreground = colors[5],
+                    foreground = colors[6],
                     ),
 #                 widget.TextBox(
 #                     "",
