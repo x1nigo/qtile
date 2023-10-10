@@ -301,6 +301,9 @@ screens = [
                     shell = True,
                     cmd = "pulsemixer --get-volume | cut -d' ' -f1",
                     fmt = "VOL {}%",
+                    mouse_callbacks = {
+                        "Button1": lazy.spawn("{} -e {}" .format(terminal, audiomixer)),
+                        },
                     update_interval = 5,
                     ),
                 widget.TextBox("|"),
@@ -310,7 +313,10 @@ screens = [
                     foreground = colors[6],
                     ),
                 widget.Net(
-                    format = "NET {down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}"
+                    format = "NET {down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}",
+                    mouse_callbacks = {
+                        "Button1": lazy.spawn(terminal + " -e nmtui"),
+                        },
                     ),
                 widget.TextBox("|"),
                 widget.TextBox(
