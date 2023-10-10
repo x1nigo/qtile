@@ -64,7 +64,7 @@ keys = [
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen on the focused window",),
     Key([mod, "shift"], "Space", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "d", lazy.spawn("dmenu_run -l 30 -g 5 -z 800"), desc="Spawn dmenu and open a program"),
+    Key([mod], "d", lazy.spawn("dmenu_run -l 30 -z 800"), desc="Spawn dmenu and open a program"),
     Key([mod], "x", lazy.spawn("setbg -s"), desc="Set the background"),
     Key([mod], "grave", lazy.spawn("dmenumoji"), desc="Copy an emoji to the clipboard"),
     Key([mod], "BackSpace", lazy.spawn("sysmenu"), desc="Select a system action"),
@@ -222,7 +222,7 @@ screens = [
                     fontsize = mainIconSize,
                     foreground = colors[6],
                     mouse_callbacks = {
-                        "Button1": lazy.spawn("dmenu_run -l 30 -g 5 -z 800"),
+                        "Button1": lazy.spawn("dmenu_run -l 30 -z 800"),
                         "Button3": lazy.spawn(terminal),
                         },
                     ),
