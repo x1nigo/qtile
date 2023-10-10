@@ -293,7 +293,7 @@ screens = [
                 widget.TextBox("|"),
                 # I only used this since there's no Pipewire support in qtile yet.
                 widget.TextBox(
-                    "󱄠",
+                    "",
                     fontsize = iconSize,
                     foreground = colors[5],
                     ),
