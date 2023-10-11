@@ -55,5 +55,5 @@ Sihaya = [
     ["#c0caf5", "#c0caf5"],
     ["#85d2d2", "#85d2d2"],
     ["#E5E9F0", "#E5E9F0"],
-    ["#c0caf5", "#c0caf5"], # Custom border color
+    ["#eeeeee", "#eeeeee"], # Custom border color
     ]
