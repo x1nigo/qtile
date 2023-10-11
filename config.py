@@ -36,7 +36,7 @@ import colors
 # Variables for the window manager
 mod = "mod4"
 terminal = "st"
-borderWidth = 3
+borderWidth = 2
 gaps = 8
 myFont = "BlexMono Nerd Font Mono Bold"
 myFontSize = 12
@@ -178,13 +178,13 @@ for i in groups:
         ]
     )
 
-colors = colors.Nord
+colors = colors.Sihaya
 
 my_layout = {
         "border_width": borderWidth,
         "margin": gaps,
         "border_focus": colors[16],
-        "border_normal": colors[0],
+        "border_normal": colors[8],
         "border_on_single": True,
         "ratio": 0.5,
         }
@@ -220,7 +220,7 @@ screens = [
                 widget.TextBox(
                     "",
                     fontsize = mainIconSize,
-                    foreground = colors[6],
+                    foreground = colors[5],
                     mouse_callbacks = {
                         "Button1": lazy.spawn("dmenu_run -l 30 -z 800"),
                         "Button3": lazy.spawn(terminal),
@@ -233,7 +233,7 @@ screens = [
                     inactive = colors[15],
                     borderwidth = 2,
                     highlight_color = colors[8],
-                    this_current_screen_border = colors[6],
+                    this_current_screen_border = colors[5],
                     disable_drag = True,
                     ),
                 widget.TextBox("|"),
@@ -241,7 +241,7 @@ screens = [
                 widget.CurrentLayout(),
                 widget.TextBox("|"),
                 widget.WindowName(
-                    foreground = colors[6],
+                    foreground = colors[5],
                     ),
 #                 widget.TextBox(
 #                     "",
@@ -266,14 +266,14 @@ screens = [
                     ),
                 widget.TextBox("|"),
                 widget.TextBox(
-                    "",
+                    "󰄦",
                     fontsize = iconSize,
                     foreground = colors[6],
                     ),
                 widget.CPU(),
                 widget.TextBox("|"),
                 widget.TextBox(
-                    "󰝫",
+                    "󱛟",
                     fontsize = iconSize,
                     foreground = colors[3],
                     ),
@@ -288,7 +288,7 @@ screens = [
                     ),
                 widget.Backlight(
                     backlight_name = "intel_backlight",
-                    format = "BRI {percent:2.0%}",
+                    format = "{percent:2.0%}",
                     ),
                 widget.TextBox("|"),
                 # I only used this since there's no Pipewire support in qtile yet.
@@ -299,10 +299,25 @@ screens = [
                     ),
                 widget.GenPollCommand(
                     shell = True,
-                    cmd = "pulsemixer --get-volume | cut -d' ' -f1",
+                    cmd = "wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -d' ' -f2 | sed 's/.*\.//'",
                     fmt = "VOL {}%",
                     mouse_callbacks = {
                         "Button1": lazy.spawn("{} -e {}" .format(terminal, audiomixer)),
+                        },
+                    update_interval = 5,
+                    ),
+                widget.TextBox("|"),
+                widget.TextBox(
+                    "󰍮",
+                    fontsize = iconSize,
+                    foreground = colors[3],
+                    ),
+                widget.GenPollCommand(
+                    shell = True,
+                    cmd = "wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | cut -d' ' -f2 | sed 's/.*\.//'",
+                    fmt = "MIC {}%",
+                    mouse_callbacks = {
+                        "ButKton1": lazy.spawn("{} -e {}" .format(terminal, audiomixer)),
                         },
                     update_interval = 5,
                     ),
@@ -313,7 +328,7 @@ screens = [
                     foreground = colors[6],
                     ),
                 widget.Net(
-                    format = "NET {down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}",
+                    format = "{down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}",
                     mouse_callbacks = {
                         "Button1": lazy.spawn(terminal + " -e nmtui"),
                         },
@@ -329,7 +344,7 @@ screens = [
                     charge_char = " +",
                     discharge_char = "",
                     empty_char = " x",
-                    format = "BAT {percent:2.0%}{char}"
+                    format = "{percent:2.0%}{char}"
                     ),
                 widget.TextBox("|"),
                 widget.TextBox(

@@ -15,7 +15,7 @@ GruvboxDark = [
     ["#d3869b", "#d3869b"],
     ["#8ec07c", "#8ec07c"],
     ["#ebdbb2", "#ebdbb2"],
-    ["#500000", "#500000"], # Custom border color
+    ["#eeeeee", "#eeeeee"], # Custom border color
     ]
 
 TokyoNight = [
@@ -35,25 +35,25 @@ TokyoNight = [
     ["#989AF7", "#989AF7"],
     ["#7DCFFF", "#7DCFFF"],
     ["#C0CAF5", "#C0CAF5"],
-    ["#500000", "#500000"], # Custom border color
+    ["#eeeeee", "#eeeeee"], # Custom border color
     ]
 
-Nord = [
-    ["#121218af", "#121218ff"],
-    ["#BF616A", "#BF616A"],
-    ["#A3BE8C", "#A3BE8C"],
-    ["#EBCB8B", "#EBCB8B"],
-    ["#81A1C1", "#81A1C1"],
-    ["#B48EAD", "#B48EAD"],
-    ["#88C0D0", "#88C0D0"],
+Sihaya = [
+    ["#1d2028af", "#1d2028ff"],
+    ["#ff5555", "#ff5555"],
+    ["#A3cE8C", "#A3cE8C"],
+    ["#ffc18b", "#ffc18b"],
+    ["#75afda", "#75afda"],
+    ["#c0caf5", "#c0caf5"],
+    ["#85d2d2", "#85d2d2"],
     ["#E5E9F0", "#E5E9F0"],
     ["#181818", "#181818"],
-    ["#BF616A", "#BF616A"],
-    ["#A3BE8C", "#A3BE8C"],
-    ["#EBCB8B", "#EBCB8B"],
-    ["#81A1C1", "#81A1C1"],
-    ["#B48EAD", "#B48EAD"],
-    ["#8FBCBB", "#8FBCBB"],
-    ["#ECEFF4", "#ECEFF4"],
-    ["#500000", "#500000"], # Custom border color
+    ["#ff5555", "#ff5555"],
+    ["#A3cE8C", "#A3cE8C"],
+    ["#ffc18b", "#ffc18b"],
+    ["#75afda", "#75afda"],
+    ["#c0caf5", "#c0caf5"],
+    ["#85d2d2", "#85d2d2"],
+    ["#E5E9F0", "#E5E9F0"],
+    ["#c0caf5", "#c0caf5"], # Custom border color
     ]
