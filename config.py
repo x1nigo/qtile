@@ -275,7 +275,7 @@ screens = [
                 widget.TextBox(
                     "󱛟",
                     fontsize = iconSize,
-                    foreground = colors[3],
+                    foreground = colors[1],
                     ),
                 widget.Memory(
                     format = "MEM {MemPercent}%",
