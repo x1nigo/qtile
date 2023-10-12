@@ -47,7 +47,7 @@ Sihaya = [
     ["#c0caf5", "#c0caf5"],
     ["#85d2d2", "#85d2d2"],
     ["#E5E9F0", "#E5E9F0"],
-    ["#181818", "#181818"],
+    ["#181818df", "#181818ff"],
     ["#ff5555", "#ff5555"],
     ["#A3cE8C", "#A3cE8C"],
     ["#ffc18b", "#ffc18b"],
@@ -55,5 +55,5 @@ Sihaya = [
     ["#c0caf5", "#c0caf5"],
     ["#85d2d2", "#85d2d2"],
     ["#E5E9F0", "#E5E9F0"],
-    ["#eeeeee", "#eeeeee"], # Custom border color
+    ["#500000", "#500000"], # Custom border color
     ]

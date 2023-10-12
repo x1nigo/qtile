@@ -36,13 +36,14 @@ import colors
 # Variables for the window manager
 mod = "mod4"
 terminal = "st"
-borderWidth = 2
+borderWidth = 3
 gaps = 8
 myFont = "BlexMono Nerd Font Mono Bold"
 myFontSize = 12
 iconSize = 22
 mainIconSize = 30
 myPadding = 5
+dmenucmd = "dmenu_run -l 30 -g 5 -z 800"
 
 # Programs
 myBrowser = "firefox"
@@ -55,27 +56,28 @@ musicPlayer = "ncmpcpp"
 
 keys = [
     # Some basic commands.
-    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod, "shift"], "Return", lazy.spawn("floater"), desc="Launch floating terminal"),
-    Key([mod], "r", lazy.spawn("{} -e {}" .format(terminal, myFileManager)), desc="Launch the file browser"),
+    Key([mod, "shift"], "Space", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
     Key([mod, "shift"], "r", lazy.spawn(terminal + " -e " + backupFM), desc="Launch the backup file browser"),
+    Key([mod], "apostrophe", lazy.spawn(terminal + " -t termfloat -f monospace:size=16 -g 50x20 -e bc -lq"), desc="Open a terminal calculator"),
+    Key([mod], "BackSpace", lazy.spawn("sysmenu"), desc="Select a system action"),
+    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([mod], "Insert", lazy.spawn("inserter"), desc="Insert a bookmark"),
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+    Key([mod], "grave", lazy.spawn("dmenumoji"), desc="Copy an emoji to the clipboard"),
+    Key([mod], "r", lazy.spawn("{} -e {}" .format(terminal, myFileManager)), desc="Launch the file browser"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen on the focused window",),
-    Key([mod, "shift"], "Space", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
-    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "d", lazy.spawn("dmenu_run -l 30 -z 800"), desc="Spawn dmenu and open a program"),
+    Key([mod], "d", lazy.spawn(dmenucmd), desc="Spawn dmenu and open a program"),
     Key([mod], "x", lazy.spawn("setbg -s"), desc="Set the background"),
-    Key([mod], "grave", lazy.spawn("dmenumoji"), desc="Copy an emoji to the clipboard"),
-    Key([mod], "BackSpace", lazy.spawn("sysmenu"), desc="Select a system action"),
     Key([mod], "w", lazy.spawn(myBrowser), desc="Load up the browser"),
-    Key([mod], "Insert", lazy.spawn("inserter"), desc="Insert a bookmark"),
     Key([mod], "b", lazy.spawn("bookmarker"), desc="Append a bookmark"),
     Key([mod], "p", lazy.spawn("texfind"), desc="Find and display PDF files"),
-    Key([mod], "apostrophe", lazy.spawn(terminal + " -t termfloat -f monospace:size=16 -g 50x20 -e bc -lq"), desc="Open a terminal calculator"),
     Key([mod], "e", lazy.spawn(terminal + " -e " + emailClient), desc="Look up your email"),
     Key([mod], "n", lazy.spawn(terminal + " -e " + rssFeed), desc="Read the news"),
     Key([mod], "m", lazy.spawn(terminal + " -e " + musicPlayer), desc="Play music"),
+    Key([], "Print", lazy.spawn("printscreen"), desc="Take a screenshot"),
 
     # Function keys
     Key([mod], "F1", lazy.spawn("readme"), desc="Navigate your way around the system"),
@@ -91,10 +93,10 @@ keys = [
 
     # Multimedia Controls
     # Volume + Mic
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"), desc="Raise the volume"),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), desc="Lower the volume"),
     Key(["shift"], "XF86AudioRaiseVolume", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+"), desc="Raise the mic"),
     Key(["shift"], "XF86AudioLowerVolume", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-"), desc="Lower the mic"),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"), desc="Raise the volume"),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), desc="Lower the volume"),
 
     # Mute Controls
     Key([], "XF86AudioMute", lazy.spawn("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), desc="Mute the volume"),
@@ -105,12 +107,12 @@ keys = [
     Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 5"), desc="Decrease the screen brightness"),
 
     # Alternative Multimedia Controls
-    Key([mod], "equal", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"), desc="Raise the volume"),
-    Key([mod], "minus", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), desc="Lower the volume"),
     Key([mod, "shift"], "period", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+"), desc="Raise the mic"),
     Key([mod, "shift"], "comma", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-"), desc="Lower the mic"),
     Key([mod, "shift"], "equal", lazy.spawn("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), desc="Mute the volume"),
     Key([mod, "shift"], "slash", lazy.spawn("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), desc="Mute the mic"),
+    Key([mod], "equal", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"), desc="Raise the volume"),
+    Key([mod], "minus", lazy.spawn("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), desc="Lower the volume"),
     Key([mod], "bracketright", lazy.spawn("xbacklight -inc 5"), desc="Increase the screen brightness"),
     Key([mod], "bracketleft", lazy.spawn("xbacklight -dec 5"), desc="Decrease the screen brightness"),
 
@@ -220,9 +222,9 @@ screens = [
                 widget.TextBox(
                     "",
                     fontsize = mainIconSize,
-                    foreground = colors[5],
+                    foreground = colors[1],
                     mouse_callbacks = {
-                        "Button1": lazy.spawn("dmenu_run -l 30 -z 800"),
+                        "Button1": lazy.spawn(dmenucmd),
                         "Button3": lazy.spawn(terminal),
                         },
                     ),
@@ -230,10 +232,11 @@ screens = [
                 widget.GroupBox(
                     highlight_method = "line",
                     active = colors[6],
-                    inactive = colors[15],
+                    inactive = colors[7],
                     borderwidth = 2,
                     highlight_color = colors[8],
-                    this_current_screen_border = colors[5],
+                    this_current_screen_border = colors[7],
+                    block_highlight_text_color = colors[5],
                     disable_drag = True,
                     ),
                 widget.TextBox("|"),
@@ -241,7 +244,7 @@ screens = [
                 widget.CurrentLayout(),
                 widget.TextBox("|"),
                 widget.WindowName(
-                    foreground = colors[5],
+                    foreground = colors[1],
                     ),
 #                 widget.TextBox(
 #                     "",
@@ -307,21 +310,21 @@ screens = [
                     update_interval = 5,
                     ),
                 widget.TextBox("|"),
-                widget.TextBox(
-                    "󰍮",
-                    fontsize = iconSize,
-                    foreground = colors[3],
-                    ),
-                widget.GenPollCommand(
-                    shell = True,
-                    cmd = "wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | cut -d' ' -f2 | sed 's/.*\.//'",
-                    fmt = "MIC {}%",
-                    mouse_callbacks = {
-                        "ButKton1": lazy.spawn("{} -e {}" .format(terminal, audiomixer)),
-                        },
-                    update_interval = 5,
-                    ),
-                widget.TextBox("|"),
+#                widget.TextBox(
+#                    "󰍮",
+#                    fontsize = iconSize,
+#                    foreground = colors[3],
+#                    ),
+#                widget.GenPollCommand(
+#                    shell = True,
+#                    cmd = "wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | cut -d' ' -f2 | sed 's/.*\.//'",
+#                    fmt = "MIC {}%",
+#                    mouse_callbacks = {
+#                        "ButKton1": lazy.spawn("{} -e {}" .format(terminal, audiomixer)),
+#                        },
+#                    update_interval = 5,
+#                    ),
+#                widget.TextBox("|"),
                 widget.TextBox(
                     "󰒍",
                     fontsize = iconSize,
