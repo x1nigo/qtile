@@ -231,11 +231,11 @@ screens = [
                 widget.TextBox("|"),
                 widget.GroupBox(
                     highlight_method = "line",
-                    active = colors[6],
+                    active = colors[5],
                     inactive = colors[7],
                     borderwidth = 2,
                     highlight_color = colors[8],
-                    this_current_screen_border = colors[7],
+                    this_current_screen_border = colors[5],
                     block_highlight_text_color = colors[5],
                     disable_drag = True,
                     ),
