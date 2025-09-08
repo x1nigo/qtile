@@ -191,6 +191,7 @@ screens = [
     Screen(
         top=bar.Bar(
             [
+                widget.Image(filename = "~/.config/qtile/python.png", margin = 1),
                 widget.GroupBox(
                     highlight_method = "line", # block, text, etc.
                     active = "#ebdbb2",
