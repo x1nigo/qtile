@@ -49,7 +49,7 @@ def maximize_by_switching_layout(qtile):
 keys = [
 
     Key([mod], "Return", lazy.spawn(terminal)),
-    Key([mod, "shift"], "Return", lazy.spawn("floater")),
+    Key([mod, "shift"], "Return", lazy.spawn(terminal), lazy.window.toggle_floating()), # Doesn't really work as I need it to.
     Key([mod], "w", lazy.spawn(browser)),
     Key([mod], "r", lazy.spawn("{} -e {}" .format(terminal, filemanager))),
     Key([mod], "d", lazy.spawn("dmenu_run")),
@@ -102,12 +102,12 @@ keys = [
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
-    Key(
-        [mod, "shift"],
-        "Return",
-        lazy.layout.toggle_split(),
-        desc="Toggle between split and unsplit sides of stack",
-    ),
+#     Key(
+#         [mod, "shift"],
+#         "Return",
+#         lazy.layout.toggle_split(),
+#         desc="Toggle between split and unsplit sides of stack",
+#     ),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     # Key([mod], "f", lazy.window.toggle_fullscreen()),
@@ -118,16 +118,15 @@ keys = [
 # Add key bindings to switch VTs in Wayland.
 # We can't check qtile.core.name in default config as it is loaded before qtile is started
 # We therefore defer the check until the key binding is run by using .when(func=...)
-for vt in range(1, 8):
-    keys.append(
-        Key(
-            ["control", "mod1"],
-            f"f{vt}",
-            lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
-            desc=f"Switch to VT{vt}",
-        )
-    )
-
+# for vt in range(1, 8):
+#     keys.append(
+#         Key(
+#             ["control", "mod1"],
+#             f"f{vt}",
+#             lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
+#             desc=f"Switch to VT{vt}",
+#         )
+#     )
 
 groups = [Group(i) for i in "123456789"]
 
@@ -156,14 +155,19 @@ for i in groups:
     )
 
 my_layout = {
-        "border_width": 2,
-        "margin": 12,
-        "border_focus": ["#870000"],
-        "border_normal": "#282828",
-        }
+    "border_width": 2,
+    "margin": 12,
+    "border_focus": "#870000",
+    "border_normal": "#282828",
+    }
+
+separator_values = {
+    "size_percent": 80,
+    "foreground": "#373737",
+    }
 
 layouts = [
-    layout.MonadTall(**my_layout, new_client_position="bottom"),
+    layout.MonadTall(**my_layout),
     layout.Max(),
     # layout.Columns(),
     # Try more layouts by unleashing below layouts.
@@ -177,6 +181,8 @@ layouts = [
     # layout.VerticalTile(),
     # layout.Zoomy(),
 ]
+
+floating_layout = layout.Floating(**my_layout)
 
 widget_defaults = dict(
     font="monospace",
@@ -192,6 +198,7 @@ screens = [
         top=bar.Bar(
             [
                 widget.Image(filename = "~/.config/qtile/python.png", margin = 1),
+                widget.Sep(**separator_values),
                 widget.GroupBox(
                     highlight_method = "line", # block, text, etc.
                     active = "#ebdbb2",
@@ -201,9 +208,9 @@ screens = [
                     block_highlight_text_color = "#ebdbb2",
                     this_current_screen_border = "#dc2800",
                     ),
-                widget.Sep(size_percent = 100, foreground = "#373737"),
+                widget.Sep(**separator_values),
                 widget.CurrentLayout(),
-                widget.Sep(size_percent = 100, foreground = "#373737"),
+                widget.Sep(**separator_values),
                 widget.LaunchBar(
                     progs = [("🦊", "zen-browser", "Browser"),
                              ("🎯", "st", "The simple terminal"),
@@ -212,33 +219,36 @@ screens = [
                              ("📡", "st -e nmtui", "Network Manager"),
                              ],
                     ),
-                widget.Sep(size_percent = 100, foreground = "#373737"),
+                widget.Sep(**separator_values),
                 widget.Spacer(),
-                widget.Sep(size_percent = 100, foreground = "#373737"),
+                widget.Sep(**separator_values),
                 widget.MemoryGraph(),
-                widget.Sep(size_percent = 100, foreground = "#373737"),
+                widget.Sep(**separator_values),
                 widget.Volume(
-                    mute_format = "🔇 {volume}%",
+                    mute_format = "🔇",
                     unmute_format = "📢 {volume}%",
                     ),
-                widget.Sep(size_percent = 100, foreground = "#373737"),
+                widget.Sep(**separator_values),
                 widget.Battery(
                     fmt = "{}",
                     discharge_char = "🔋",
                     empty_char = "🪫",
+                    charge_char = "🔌",
                     full_char = "⚡",
                     full_short_text = "",
-                    format = "{char} {percent:2.0%}",
                     update_interval = 10,
+                    notify_below = 20,
+                    notification_timeout = 0,
                     ),
-                widget.Sep(size_percent = 100, foreground = "#373737"),
+                widget.Sep(**separator_values),
                 widget.Systray(),
-                widget.Clock(format="%d %B %Y (%A) 🕗 %I:%M %p"),
+                widget.Clock(format="%d %B %Y (%A) 🕗 %I:%M%p"),
             ],
-            24,
+            26, # Bar height
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
-            background="#1d2021",
+            background = "#1d2021",
+            # margin = [8, 8, 0, 8],
         ),
 #         wallpaper=logo,
 #         wallpaper_mode="center",
@@ -262,18 +272,6 @@ follow_mouse_focus = True
 bring_front_click = False
 floats_kept_above = True
 cursor_warp = False
-floating_layout = layout.Floating(
-    float_rules=[
-        # Run the utility of `xprop` to see the wm class and name of an X client.
-        *layout.Floating.default_float_rules,
-        Match(wm_class="confirmreset"),  # gitk
-        Match(wm_class="makebranch"),  # gitk
-        Match(wm_class="maketag"),  # gitk
-        Match(wm_class="ssh-askpass"),  # ssh-askpass
-        Match(title="branchdialog"),  # gitk
-        Match(title="pinentry"),  # GPG key password entry
-    ]
-)
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 focus_previous_on_window_remove = False
