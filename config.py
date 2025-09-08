@@ -155,7 +155,7 @@ for i in groups:
     )
 
 my_layout = {
-    "border_width": 2,
+    "border_width": 1,
     "margin": 8,
     "border_focus": "#870000",
     "border_normal": "#282828",
@@ -187,7 +187,7 @@ floating_layout = layout.Floating(**my_layout)
 widget_defaults = dict(
     font="monospace",
     foreground="#ebdbb2",
-    fontsize=13,
+    fontsize=12,
     padding=4,
 )
 extension_defaults = widget_defaults.copy()
@@ -220,7 +220,7 @@ screens = [
                     ),
                 widget.Sep(**separator_values),
                 widget.WindowName(
-                    foreground = "#a7d7f7",
+                    foreground = "#87d7f7",
                     max_chars = 40,
                     ),
                 widget.Spacer(),
