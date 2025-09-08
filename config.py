@@ -156,13 +156,13 @@ for i in groups:
 
 my_layout = {
     "border_width": 2,
-    "margin": 12,
+    "margin": 8,
     "border_focus": "#870000",
     "border_normal": "#282828",
     }
 
 separator_values = {
-    "size_percent": 80,
+    "size_percent": 50,
     "foreground": "#373737",
     }
 
@@ -188,7 +188,7 @@ widget_defaults = dict(
     font="monospace",
     foreground="#ebdbb2",
     fontsize=13,
-    padding=5,
+    padding=4,
 )
 extension_defaults = widget_defaults.copy()
 
@@ -197,8 +197,7 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.Image(filename = "~/.config/qtile/python.png", margin = 1),
-                widget.Sep(**separator_values),
+                widget.Image(filename = "~/.config/qtile/python.png", margin = 2),
                 widget.GroupBox(
                     highlight_method = "line", # block, text, etc.
                     active = "#ebdbb2",
@@ -220,13 +219,16 @@ screens = [
                              ],
                     ),
                 widget.Sep(**separator_values),
+                widget.WindowName(
+                    foreground = "#a7d7f7",
+                    max_chars = 40,
+                    ),
                 widget.Spacer(),
-                widget.Sep(**separator_values),
                 widget.MemoryGraph(),
                 widget.Sep(**separator_values),
                 widget.Volume(
                     mute_format = "🔇",
-                    unmute_format = "📢 {volume}%",
+                    unmute_format = "📢 Vol: {volume}%",
                     ),
                 widget.Sep(**separator_values),
                 widget.Battery(
