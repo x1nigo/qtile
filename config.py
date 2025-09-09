@@ -155,7 +155,7 @@ for i in groups:
     )
 
 my_layout = {
-    "border_width": 1,
+    "border_width": 2,
     "margin": 8,
     "border_focus": "#870000",
     "border_normal": "#282828",
@@ -185,10 +185,10 @@ layouts = [
 floating_layout = layout.Floating(**my_layout)
 
 widget_defaults = dict(
-    font="monospace",
+    font="monospace bold",
     foreground="#ebdbb2",
     fontsize=12,
-    padding=4,
+    padding=5,
 )
 extension_defaults = widget_defaults.copy()
 
@@ -200,15 +200,16 @@ screens = [
                 widget.Image(filename = "~/.config/qtile/python.png", margin = 2),
                 widget.GroupBox(
                     highlight_method = "line", # block, text, etc.
+                    highlight_color = ["#121212", "#1d2021"],
                     active = "#ebdbb2",
                     inactive = "#373737",
                     borderwidth = 2,
-                    highlight_color = ["#121212", "#1d2021"],
-                    block_highlight_text_color = "#ebdbb2",
+                    block_highlight_text_color = "#87d7f7",
                     this_current_screen_border = "#dc2800",
+                    padding = 2,
                     ),
                 widget.Sep(**separator_values),
-                widget.CurrentLayout(),
+                widget.CurrentLayout(mode = "both", icon_first = True, scale = 0.8),
                 widget.Sep(**separator_values),
                 widget.LaunchBar(
                     progs = [("🦊", "zen-browser", "Browser"),
@@ -222,9 +223,15 @@ screens = [
                 widget.WindowName(
                     foreground = "#87d7f7",
                     max_chars = 40,
+                    empty_group_string = "~",
                     ),
                 widget.Spacer(),
                 widget.MemoryGraph(),
+                widget.Sep(**separator_values),
+                widget.Backlight(
+                    backlight_name = "intel_backlight",
+                    fmt = "🌅 Bri: {}",
+                    ),
                 widget.Sep(**separator_values),
                 widget.Volume(
                     mute_format = "🔇",
@@ -233,6 +240,7 @@ screens = [
                 widget.Sep(**separator_values),
                 widget.Battery(
                     fmt = "{}",
+                    format = "{char} {percent:2.0%}",
                     discharge_char = "🔋",
                     empty_char = "🪫",
                     charge_char = "🔌",
@@ -244,13 +252,13 @@ screens = [
                     ),
                 widget.Sep(**separator_values),
                 widget.Systray(),
-                widget.Clock(format="%d %B %Y (%A) 🕗 %I:%M%p"),
+                widget.Clock(format="%B %d, %Y - %A 🕗 %I:%M%p"),
             ],
             26, # Bar height
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
             background = "#1d2021",
-            # margin = [8, 8, 0, 8],
+            margin = [8, 8, 0, 8], # Orientation: N, E, S, W
         ),
 #         wallpaper=logo,
 #         wallpaper_mode="center",
