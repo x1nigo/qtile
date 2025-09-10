@@ -25,9 +25,10 @@
 # SOFTWARE.
 
 import os
+import subprocess
 
 import libqtile.resources
-from libqtile import bar, layout, qtile, widget
+from libqtile import bar, layout, qtile, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 # from libqtile.utils import guess_terminal
@@ -38,13 +39,10 @@ browser = "zen-browser" # librewolf, firefox, etc.
 filemanager = "lfup"
 volumecontrols = "pulsemixer"
 
-@lazy.function
-def maximize_by_switching_layout(qtile):
-    current_layout_name = qtile.current_group.layout.name
-    if current_layout_name == 'monadtall':
-        qtile.current_group.layout = 'max'
-    elif current_layout_name == 'max':
-        qtile.current_group.layout = 'monadtall'
+# @hook.subscribe.startup_once
+# def autostart():
+#     home = os.path.expanduser('~/.config/qtile/autostart.sh')
+#     subprocess.call(home)
 
 keys = [
 
@@ -52,7 +50,7 @@ keys = [
     Key([mod, "shift"], "Return", lazy.spawn(terminal), lazy.window.toggle_floating()), # Doesn't really work as I need it to.
     Key([mod], "w", lazy.spawn(browser)),
     Key([mod], "r", lazy.spawn("{} -e {}" .format(terminal, filemanager))),
-    Key([mod], "d", lazy.spawn("dmenu_run")),
+    Key([mod], "d", lazy.spawn("dmenu_run -c")),
     Key([mod], "b", lazy.spawn("bookmarker")),
     Key([mod], "v", lazy.spawn("watchvid")),
     Key([mod], "q", lazy.window.kill()),
@@ -98,20 +96,10 @@ keys = [
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
-    # Toggle between split and unsplit sides of stack.
-    # Split = all windows displayed
-    # Unsplit = 1 window displayed, like Max layout, but still with
-    # multiple stack panes
-#     Key(
-#         [mod, "shift"],
-#         "Return",
-#         lazy.layout.toggle_split(),
-#         desc="Toggle between split and unsplit sides of stack",
-#     ),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     # Key([mod], "f", lazy.window.toggle_fullscreen()),
-    Key([mod], "f", maximize_by_switching_layout(), lazy.window.toggle_fullscreen(), desc='toggle fullscreen'),
+    Key([mod], "f", lazy.window.toggle_fullscreen(), desc='toggle fullscreen'),
     Key([mod], "space", lazy.window.move_to_top(), desc="Move window to top"),
 ]
 
@@ -203,7 +191,7 @@ screens = [
                     highlight_color = ["#121212", "#1d2021"],
                     active = "#ebdbb2",
                     inactive = "#373737",
-                    borderwidth = 2,
+                    borderwidth = 3,
                     block_highlight_text_color = "#87d7f7",
                     this_current_screen_border = "#dc2800",
                     padding = 2,
@@ -230,17 +218,19 @@ screens = [
                 widget.Sep(**separator_values),
                 widget.Backlight(
                     backlight_name = "intel_backlight",
-                    fmt = "🌅 Bri: {}",
+                    fmt = "🌅 BRI: {}",
+                    foreground = "#5787f7",
                     ),
                 widget.Sep(**separator_values),
                 widget.Volume(
                     mute_format = "🔇",
-                    unmute_format = "📢 Vol: {volume}%",
+                    unmute_format = "📢 VOL: {volume}%",
+                    foreground = "#ff9757",
                     ),
                 widget.Sep(**separator_values),
                 widget.Battery(
                     fmt = "{}",
-                    format = "{char} {percent:2.0%}",
+                    format = "{char} BAT: {percent:2.0%}",
                     discharge_char = "🔋",
                     empty_char = "🪫",
                     charge_char = "🔌",
@@ -249,12 +239,16 @@ screens = [
                     update_interval = 10,
                     notify_below = 20,
                     notification_timeout = 0,
+                    foreground = "#87d7a7",
                     ),
                 widget.Sep(**separator_values),
                 widget.Systray(),
-                widget.Clock(format="%B %d, %Y - %A 🕗 %I:%M%p"),
+                widget.Clock(
+                        format="%B %d, %Y - %A 🕗 %I:%M%p",
+                        foreground = "#87d7f7",
+                             ),
             ],
-            26, # Bar height
+            28, # Bar height
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
             background = "#1d2021",
@@ -282,7 +276,7 @@ follow_mouse_focus = True
 bring_front_click = False
 floats_kept_above = True
 cursor_warp = False
-auto_fullscreen = True
+auto_fullscreen = False
 focus_on_window_activation = "smart"
 focus_previous_on_window_remove = False
 reconfigure_screens = True
