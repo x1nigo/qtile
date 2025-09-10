@@ -219,17 +219,17 @@ screens = [
                 widget.Sep(**separator_values),
                 widget.Backlight(
                     backlight_name = "intel_backlight",
-                    fmt = "🌅 {}",
+                    fmt = "🌅{}",
                     foreground = "#5787f7",
                     ),
                 widget.Volume(
                     mute_format = "🔇",
-                    unmute_format = "📢 {volume}%",
+                    unmute_format = "📢{volume}%",
                     foreground = "#ff9757",
                     ),
                 widget.Battery(
                     fmt = "{}",
-                    format = "{char} {percent:2.0%}",
+                    format = "{char}{percent:2.0%}",
                     discharge_char = "🔋",
                     empty_char = "🪫",
                     charge_char = "🔌",
